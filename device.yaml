@@ -12,8 +12,6 @@ dcn:
   - model: S5750E-28F-SI
   - model: DCS-7124SX-F
 
-qtech:
-  - model: QTECH QSW-4610-28T-AC
 
 tp-link:
   - model: TL-SG3210
