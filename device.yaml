@@ -1,8 +1,3 @@
-cisco:
-  - model: Cisco Catalyst 2960
-  - model: Cisco Nexus 9000
-  - model: Cisco ISR 4000
-
 snr:
   - model: SNR-S2982G-24T-POE
   - model: SNR-S2982G-24TE
