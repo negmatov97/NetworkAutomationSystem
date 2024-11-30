@@ -1,0 +1,354 @@
+
+Tarmoq qurulmasiga ruxsatsiz kirish qonunga muvofiq ta'qib qilinadi
+red_team#enable
+red_team#terminal length 0
+red_team#show running-config
+!
+service password-encryption
+!
+hostname red_team
+sysLocation Building 57/2,Predelnaya st, Ekaterinburg, Russia
+sysContact support@nag.ru
+!
+enable password level 4 7 1307a7c0a7cd158491766ea0404b5e98
+enable password level 15 7 d359397f693bd6b3aae68177656445bf
+banner motd Tarmoq qurulmasiga ruxsatsiz kirish qonunga muvofiq ta'qib qilinadi
+banner login Tarmoq qurulmasiga ruxsatsiz kirish qonunga muvofiq ta'qib qilinadi
+!
+username kd_admin privilege 15 password 7 4c5f5993b568a5c8d76bcb2595e09fe3
+!
+authentication line console login local
+authentication line vty login tacacs local
+authentication line web login tacacs local
+authorization line console exec tacacs local
+authorization line vty exec tacacs local
+authorization line web exec tacacs local
+aaa authorization config-commands
+authorization line vty command 15 tacacs local
+accounting line vty exec start-stop tacacs
+accounting line vty command 15 start-stop tacacs
+!
+!
+!
+clock timezone Tashkent add 5 0
+time-range t1
+ periodic  saturday 12:00:00 to 12:00:01
+!
+!
+logging 10.70.26.205 facility local7 level informational
+logging 197.181.58.199 level debugging
+logging 197.181.58.199 facility local7 level debugging
+logging 197.181.58.250 level informational
+logging 197.181.58.199 facility local1 level debugging
+logging 10.70.26.209 level debugging
+logging 10.70.26.209 facility local7 level debugging
+logging loghost sequence-number
+logging executed-commands enable
+logging flash level debugging
+!
+ssh-server enable
+ssh-server timeout 300
+!
+no telnet-server enable
+!
+tacacs-server authentication host 10.70.26.209 key 7 D/MD50V67oGx4w9HOnJ+ig==
+!
+snmp-server enable
+snmp-server trap-source 192.168.202.46
+snmp-server securityip disable
+snmp-server host 192.168.202.46 v2c exat
+snmp-server community rw 7 t/DFDy7Uyls= write v2defaultviewname
+snmp-server community ro 7 UbMIPDRaSiU=
+snmp-server enable traps
+snmp-server enable traps if-ber max-warning-value 1
+!
+!
+!
+!
+!
+am enable
+!
+!
+loopback-detection interval-time 5 30
+!
+!
+!
+vlan 1;20;3078 
+!
+vlan 10
+ name Kamera_KD
+!
+vlan 13
+ name IP_TEL_TTKB
+!
+vlan 19
+ name pfsense_LAN
+!
+vlan 30
+ name Ichki_exat
+!
+vlan 100
+ name test1
+!
+vlan 200
+ name test2
+!
+vlan 202
+ name ma
+!
+vlan 203
+ name one_net_MA
+!
+vlan 208
+ name SOD_Net
+!
+vlan 211
+ name IP_TEL
+!
+vlan 241
+ name GRU_Boshqarma_net
+!
+vlan 398
+ name MV_SITE_ADMINS
+!
+vlan 399
+ name Internet_MNGMNT
+!
+vlan 400
+ name 3_upravleniya
+!
+vlan 401
+ name Beliy_ip
+!
+vlan 403
+ name beliy_ip
+!
+vlan 505
+ name Face_ID
+!
+vlan 788
+ name Delet_me
+!
+vlan 906
+ name internet_test
+!
+vlan 990
+ name server_MSPD_local
+!
+vlan 991
+ name MV_MA_Priziv
+!
+vlan 999
+ name Native_vlan
+!
+vlan 1040
+ name pojarniy
+!
+vlan 1076
+ name Prokratura_mspd
+!
+vlan 1134
+ name vks
+!
+vlan 1406
+ name Bankomat
+!
+vlan 1489
+ name Kiber_poligon
+!
+vlan 2309
+ name Internet
+!
+vlan 2385
+ name ASBD_YOPIQ
+!
+vlan 2392
+ name ASBD_L3
+!
+vlan 2743
+ name MSPD
+!
+vlan 2757
+ name 3-xizmat(MSPD)
+!
+vlan 2804
+ name Beliy_GRU
+!
+vlan 2984
+ name BKZ_VKS_Beliy
+!
+vlan 3303
+ name ONE_NET_THO
+!
+vlan 3381
+ name Kamera
+!
+radius-server authentication host 192.168.202.110 key 7 4BQDP32U84s= primary
+aaa enable
+!
+Interface Ethernet1/0/1
+ description Tel:72-06_1_patchport
+ switchport access vlan 211
+!
+Interface Ethernet1/0/2
+ description Tel:70-15_2_patchport
+ switchport access vlan 211
+!
+Interface Ethernet1/0/3
+ switchport access vlan 211
+!
+Interface Ethernet1/0/4
+ description tel:60-90_4_pac
+ switchport access vlan 211
+!
+Interface Ethernet1/0/5
+ description Alimatov_test
+ switchport access vlan 211
+!
+Interface Ethernet1/0/6
+ description Alimatov_NET_6p
+ switchport access vlan 399
+!
+Interface Ethernet1/0/7
+ switchport access vlan 399
+!
+Interface Ethernet1/0/8
+ description MCPD_24p_1076
+ switchport access vlan 2757
+!
+Interface Ethernet1/0/9
+ description Alimatov_HDFU
+ switchport access vlan 2757
+!
+Interface Ethernet1/0/10
+ switchport access vlan 19
+!
+Interface Ethernet1/0/11
+ switchport access vlan 19
+!
+Interface Ethernet1/0/12
+ description Negmatov_HDFU_17_patchport
+ switchport access vlan 30
+!
+Interface Ethernet1/0/13
+ description Negmatov_NET
+ switchport access vlan 399
+!
+Interface Ethernet1/0/14
+ description Sidiqov_NET_14_pachport
+ switchport access vlan 399
+!
+Interface Ethernet1/0/15
+ description Sidiqov_HDFU_15_pachport
+ switchport access vlan 30
+!
+Interface Ethernet1/0/16
+ switchport access vlan 19
+!
+Interface Ethernet1/0/17
+ description Bankomat
+ switchport access vlan 2757
+!
+Interface Ethernet1/0/18
+ description ISBD_PC_ong
+ switchport access vlan 399
+!
+Interface Ethernet1/0/19
+ speed-duplex auto
+ description Doniyorov_NET1_21_pachport
+ switchport access vlan 399
+!
+Interface Ethernet1/0/20
+ description Axmedov_NET_24_pachport
+ switchport access vlan 19
+!
+Interface Ethernet1/0/21
+ description Tel:60-53_21_pachport
+ switchport access vlan 211
+!
+Interface Ethernet1/0/22
+ description Sobirjonov_NET_22_pachport
+ switchport access vlan 399
+!
+Interface Ethernet1/0/23
+ description Doniyorov_NET2_19_pachport
+ switchport access vlan 399
+!
+Interface Ethernet1/0/24
+ switchport access vlan 19
+!
+Interface Ethernet1/0/25
+ description test
+ switchport access vlan 19
+!
+Interface Ethernet1/0/26
+ shutdown
+!
+Interface Ethernet1/0/27
+ shutdown
+ switchport access vlan 2757
+!
+Interface Ethernet1/0/28
+ description Milliy_markaz_podval_J_1_4_SW3_51p
+ switchport mode trunk
+ switchport trunk allowed vlan 10;13;19;30;201-205;208;211;241 
+ switchport trunk allowed vlan add 398-401;403;505;906;990-991;1040 
+ switchport trunk allowed vlan add 1076;1134;1406;1489;2309;2314;2385 
+ switchport trunk allowed vlan add 2392;2743;2757;2804;2984;3078;3303 
+ switchport trunk allowed vlan add 3381 
+ switchport trunk native vlan 999
+!
+interface Vlan1
+!
+interface Vlan10
+!
+interface Vlan19
+ ip address 10.20.241.32 255.255.255.0
+!
+interface Vlan30
+ ip address 197.181.58.104 255.255.255.0
+!
+interface Vlan241
+!
+interface Vlan399
+ ip address 192.168.202.207 255.255.255.0
+!
+interface Vlan990
+!
+interface Vlan1489
+ ip address 192.168.0.207 255.255.255.0
+!
+interface Vlan2743
+!
+interface Vlan2757
+ ip address 10.70.26.207 255.255.255.0
+!
+interface Vlan3381
+ ip address 190.160.10.255 255.255.248.0
+!
+ip default-gateway 10.20.209.254
+!
+ntp enable
+ntp server 10.70.26.205
+ntp server 197.181.58.251
+!
+!
+privilege interface-ether level 7 all
+privilege config level 4  interface Ethernet1/0/1-24
+privilege exec level 4  show running-config
+privilege exec level 4  show mac-address-table
+privilege exec level 10  ping
+privilege exec level 10  config
+privilege config level 10  interface ethernet 1/0/1
+privilege config level 10  interface ethernet 1/0/2
+privilege config level 10  interface ethernet 1/0/3-28
+privilege interface-ether level 10  shutdown
+privilege interface-ether level 10  no shutdown
+!
+no login
+!
+captive-portal
+!
+end
+
+red_team#

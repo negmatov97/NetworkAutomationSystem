@@ -1,0 +1,164 @@
+
+T2600G-28TS>enable
+
+T2600G-28TS#terminal length 0
+
+T2600G-28TS#show running-config
+!T2600G-28TS
+#
+vlan 399
+ name "MGMT"
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+serial_port baud_rate 38400
+#
+#
+system-time ntp UTC+08:00 133.100.9.2 139.78.100.163 12
+no system-time dst
+#
+#
+#
+user name Negmatov privilege admin password 0 admin123
+user name admin privilege admin secret 5 $1$@0I1@1C9G:K<G2B4@4A5O/F8M>A7K4@/$%%/[
+no service reset-disable
+#
+#
+#
+#
+#
+#
+#
+#
+#
+ip ssh server 
+#
+#
+#
+#
+#
+
+#
+#
+#
+#
+#
+#
+#
+#
+interface vlan 1
+  ip address 192.168.0.1 255.255.255.0
+  ipv6 enable
+#
+interface vlan 399
+  ip address 172.16.0.250 255.255.255.0
+  no ipv6 enable
+#
+interface gigabitEthernet 1/0/1
+  description "SNR_8port"
+  switchport general allowed vlan 399 untagged
+  switchport pvid 399
+  
+#
+interface gigabitEthernet 1/0/2
+  
+#
+interface gigabitEthernet 1/0/3
+  
+#
+interface gigabitEthernet 1/0/4
+  
+#
+interface gigabitEthernet 1/0/5
+  
+#
+interface gigabitEthernet 1/0/6
+  
+#
+interface gigabitEthernet 1/0/7
+  
+#
+interface gigabitEthernet 1/0/8
+  
+#
+interface gigabitEthernet 1/0/9
+  
+#
+interface gigabitEthernet 1/0/10
+  
+#
+interface gigabitEthernet 1/0/11
+  
+#
+interface gigabitEthernet 1/0/12
+  
+#
+interface gigabitEthernet 1/0/13
+  
+#
+interface gigabitEthernet 1/0/14
+  
+#
+interface gigabitEthernet 1/0/15
+  
+#
+interface gigabitEthernet 1/0/16
+  
+#
+interface gigabitEthernet 1/0/17
+  
+#
+interface gigabitEthernet 1/0/18
+  
+#
+interface gigabitEthernet 1/0/19
+  
+#
+interface gigabitEthernet 1/0/20
+  
+#
+interface gigabitEthernet 1/0/21
+  
+#
+interface gigabitEthernet 1/0/22
+  
+#
+interface gigabitEthernet 1/0/23
+  
+#
+interface gigabitEthernet 1/0/24
+  
+#
+interface gigabitEthernet 1/0/25
+  
+#
+interface gigabitEthernet 1/0/26
+  
+#
+interface gigabitEthernet 1/0/27
+  
+#
+interface gigabitEthernet 1/0/28
+  
+#
+end
+
+T2600G-28TS#

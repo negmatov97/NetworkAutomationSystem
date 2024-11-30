@@ -1,0 +1,2 @@
+
+T2600G-28TS>enableterminal length 0show running-config

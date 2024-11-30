@@ -1,0 +1,46 @@
+cisco:
+  - model: Cisco Catalyst 2960
+  - model: Cisco Nexus 9000
+  - model: Cisco ISR 4000
+
+snr:
+  - model: SNR-S2982G-24T-POE
+  - model: SNR-S2982G-24TE
+  - model: SNR-S2985G-24TC
+  - model: SNR-S2990G-24TX
+  - model: SNR-S2985G-8T-POE
+  - model: SNR-S2982G-8T-POE
+  - model: SNR-S2985G-8T
+
+dcn:
+  - model: S4600-28P-P-SI
+  - model: S5750E-28F-SI
+  - model: DCS-7124SX-F
+
+qtech:
+  - model: QTECH QSW-4610-28T-AC
+
+tp-link:
+  - model: TL-SG3210
+  - model: TL-SG3428
+  - model: TP-LINK TL-SG3210
+  - model: TP-LINK TL-SG2428P
+  - model: TP-LINK TL-SG3428MP
+  - model: TP-LINK T2600G-28MPS
+  - model: TP-LINK TL-SG3428MP
+  - model: TP-LINK T2600G-28TS
+
+
+eltex:
+  - model: ELTEX MES2428P
+  - model: ELTEX MES2428
+
+hp:
+  - model: HP ProCurve 2530-24G
+  - model: HP Aruba 2930F
+  - model: HP V1910-48G
+
+name:
+  - model: Name Model 1
+  - model: Name Model 2
+  - model: Name Model 3

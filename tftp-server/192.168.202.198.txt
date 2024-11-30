@@ -1,0 +1,269 @@
+
+8_Etaj_C_Blok>enable
+
+8_Etaj_C_Blok#terminal length 0
+
+8_Etaj_C_Blok#show running-config
+!T2600G-28TS
+#
+vlan 20
+ name "internet"
+#
+vlan 30
+ name "E-XAT"
+#
+vlan 203
+ name "one_net_MA"
+#
+vlan 399
+ name "TEST"
+#
+vlan 991
+ name "MV_MA_Priziv"
+#
+vlan 1235
+#
+vlan 1406
+ name "set_gfeu"
+#
+vlan 2743
+ name "MSPD"
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+hostname "8_Etaj_C_Blok"
+contact-info ""
+serial_port baud_rate 38400
+#
+logging monitor level 7
+logging buffer level 7
+logging file flash level 7
+logging file flash frequency immediate
+logging host index 1 197.181.58.250 6
+#
+no system-time ntp
+no system-time dst
+#
+#
+#
+aaa authentication login console local 
+aaa authentication login vty local 
+aaa authentication enable default local 
+user name Negmatov privilege admin password 7 fdc819f7ad03b102f5ed0cbb90bce70a
+user name kd_admin privilege admin secret 5 $1$A4K8M4J:M:L2B6M3E4K7J:A0G0O9L0C7).)[[
+service password-encryption
+command log
+no service reset-disable
+#
+#
+#
+#
+#
+#
+#
+#
+#
+ip ssh server 
+#
+#
+snmp-server
+snmp-server community "Exat" read-only "viewDefault"
+#
+#
+#
+#
+
+#
+#
+#
+#
+#
+#
+#
+#
+interface vlan 30
+  ip address 197.181.58.31 255.255.255.0
+  no ipv6 enable
+#
+interface vlan 399
+  ip address 192.168.202.198 255.255.255.0
+  no ipv6 enable
+#
+interface gigabitEthernet 1/0/1
+  shutdown
+  
+#
+interface gigabitEthernet 1/0/2
+  description "854-xona_"
+  switchport general allowed vlan 2743 untagged
+  switchport pvid 2743
+  no switchport general allowed vlan 1
+  
+#
+interface gigabitEthernet 1/0/3
+  shutdown
+  
+#
+interface gigabitEthernet 1/0/4
+  
+#
+interface gigabitEthernet 1/0/5
+  switchport general allowed vlan 20 untagged
+  switchport pvid 20
+  no switchport general allowed vlan 1
+  
+#
+interface gigabitEthernet 1/0/6
+  description "856-xona"
+  switchport general allowed vlan 20,2743 untagged
+  switchport pvid 2743
+  no switchport general allowed vlan 1
+  
+#
+interface gigabitEthernet 1/0/7
+  switchport general allowed vlan 20 untagged
+  switchport pvid 20
+  no switchport general allowed vlan 1
+  
+#
+interface gigabitEthernet 1/0/8
+  description "857_xona"
+  switchport general allowed vlan 203 untagged
+  switchport pvid 203
+  no switchport general allowed vlan 1
+  
+#
+interface gigabitEthernet 1/0/9
+  description "Fozilov_onenet"
+  switchport general allowed vlan 203 tagged
+  switchport pvid 203
+  
+#
+interface gigabitEthernet 1/0/10
+  description "856_xonaonet"
+  switchport general allowed vlan 203 untagged
+  switchport pvid 203
+  
+#
+interface gigabitEthernet 1/0/11
+  switchport general allowed vlan 20 untagged
+  switchport pvid 20
+  no switchport general allowed vlan 1
+  
+#
+interface gigabitEthernet 1/0/12
+  switchport general allowed vlan 20 untagged
+  switchport pvid 20
+  no switchport general allowed vlan 1
+  
+#
+interface gigabitEthernet 1/0/13
+  switchport general allowed vlan 30 untagged
+  switchport pvid 30
+  no switchport general allowed vlan 1
+  
+#
+interface gigabitEthernet 1/0/14
+  switchport general allowed vlan 1406 untagged
+  switchport pvid 1406
+  
+#
+interface gigabitEthernet 1/0/15
+  switchport general allowed vlan 30,1406 untagged
+  switchport pvid 1406
+  no switchport general allowed vlan 1
+  
+#
+interface gigabitEthernet 1/0/16
+  description "858_Shomaxmudova"
+  switchport general allowed vlan 1406 untagged
+  switchport pvid 1406
+  no switchport general allowed vlan 1
+  
+#
+interface gigabitEthernet 1/0/17
+  description "853-Uzakov_J"
+  switchport general allowed vlan 1406 untagged
+  switchport pvid 1406
+  no switchport general allowed vlan 1
+  
+#
+interface gigabitEthernet 1/0/18
+  switchport general allowed vlan 30 untagged
+  switchport pvid 30
+  no switchport general allowed vlan 1
+  
+#
+interface gigabitEthernet 1/0/19
+  switchport general allowed vlan 30 untagged
+  switchport pvid 30
+  no switchport general allowed vlan 1
+  
+#
+interface gigabitEthernet 1/0/20
+  description "850-xona_moliya"
+  switchport general allowed vlan 991 untagged
+  switchport pvid 991
+  no switchport general allowed vlan 1
+  
+#
+interface gigabitEthernet 1/0/21
+  switchport general allowed vlan 30 untagged
+  switchport pvid 30
+  no switchport general allowed vlan 1
+  
+#
+interface gigabitEthernet 1/0/22
+  shutdown
+  switchport general allowed vlan 30 untagged
+  switchport pvid 30
+  no switchport general allowed vlan 1
+  
+#
+interface gigabitEthernet 1/0/23
+  switchport general allowed vlan 30 untagged
+  switchport pvid 30
+  no switchport general allowed vlan 1
+  
+#
+interface gigabitEthernet 1/0/24
+  switchport general allowed vlan 30 untagged
+  switchport pvid 30
+  no switchport general allowed vlan 1
+  
+#
+interface gigabitEthernet 1/0/25
+  switchport general allowed vlan 20,30,203,399,991,1406,2743 tagged
+  no switchport general allowed vlan 1
+  
+#
+interface gigabitEthernet 1/0/26
+  
+#
+interface gigabitEthernet 1/0/27
+  
+#
+interface gigabitEthernet 1/0/28
+  
+#
+end
+
+8_Etaj_C_Blok#

@@ -1,0 +1,265 @@
+
+Tarmoq qurulmasiga ruxsatsiz kirish qonunga muvofiq ta'qib qilinadi
+BLUE_team#enable
+BLUE_team#terminal length 0
+BLUE_team#show running-config
+!
+service password-encryption
+!
+hostname BLUE_team
+sysLocation China
+sysContact 400-810-9119
+!
+banner motd Tarmoq qurulmasiga ruxsatsiz kirish qonunga muvofiq ta'qib qilinadi
+banner login Tarmoq qurulmasiga ruxsatsiz kirish qonunga muvofiq ta'qib qilinadi
+!
+username kd_admin privilege 15 password 7 4c5f5993b568a5c8d76bcb2595e09fe3
+username admin privilege 15 password 7 21232f297a57a5a743894a0e4a801fc3
+!
+authentication line console login tacacs local
+authentication line vty login tacacs local
+authentication line web login tacacs local
+authorization line console exec tacacs local
+authorization line vty exec tacacs local
+authorization line web exec tacacs local
+aaa authorization config-commands
+authorization line vty command 15 tacacs local
+accounting line console exec start-stop tacacs
+accounting line vty exec start-stop tacacs
+accounting line console command 15 start-stop tacacs
+accounting line vty command 15 start-stop tacacs
+!
+!
+!
+clock timezone Tashkent add 5 0
+!
+logging 197.181.58.250 level informational
+logging 197.181.58.199 facility local1 level debugging
+logging loghost sequence-number
+logging executed-commands enable
+logging flash level debugging
+!
+ssh-server enable
+ssh-server timeout 300
+!
+web language english
+!
+no telnet-server enable
+!
+tacacs-server authentication host 10.70.26.209 key 7 D/MD50V67oGx4w9HOnJ+ig==
+!
+snmp-server enable
+snmp-server securityip 192.168.202.79
+snmp-server securityip 192.168.202.25
+snmp-server securityip 10.70.26.219
+snmp-server securityip disable
+snmp-server host 192.168.202.79 v2c MVKDSnmpTrap
+snmp-server host 192.168.202.25 v2c MVKDSnmpTrap
+snmp-server host 10.70.26.219 v2c MVKDSnmpTrap
+snmp-server community ro 7 UbMIPDRaSiU=
+snmp-server community ro 7 pqpjvXN+VNIYejueIV03Qg==
+snmp-server enable traps
+!
+!
+!
+!
+!
+am enable
+!
+!
+loopback-detection interval-time 5 30
+!
+loopback-detection control-recovery timeout 30
+!
+loopback-detection trap enable
+!
+vlan 1 
+!
+vlan 10
+ name Camera_KD
+!
+vlan 30
+ name Ichki_Exat
+!
+vlan 77
+ name your_vlan_name_here
+!
+vlan 89
+ name testor
+!
+vlan 211
+ name IP_tel
+!
+vlan 399
+ name ONE_net
+!
+vlan 505
+ name Face_ID
+!
+vlan 777
+ name mgmnt
+!
+vlan 788
+ name Delet_me
+!
+vlan 1489
+ name Kiber_poligon
+!
+vlan 2002
+ name KADR_NET
+!
+vlan 2757
+ name L3_Exat
+!
+vlan 3303
+ name L2_OneNet
+!
+vlan 3381
+ name Camera_tashqi
+!
+Interface Ethernet1/0/1
+ description Dadaboyev_TEL
+ switchport access vlan 211
+!
+Interface Ethernet1/0/2
+ switchport access vlan 211
+!
+Interface Ethernet1/0/3
+ description Komilov_TEL
+ switchport access vlan 211
+!
+Interface Ethernet1/0/4
+ description Ubaydullayev_TEL
+ switchport access vlan 211
+!
+Interface Ethernet1/0/5
+ description Narzullayev_Tel
+ switchport access vlan 211
+!
+Interface Ethernet1/0/6
+ description Komilov_ip_tel
+ switchport access vlan 211
+!
+Interface Ethernet1/0/7
+ description Ubaydullayev_Net
+ bandwidth control 1000000 both
+ switchport access vlan 399
+!
+Interface Ethernet1/0/8
+ description Ergashev_NET
+ switchport access vlan 399
+!
+Interface Ethernet1/0/9
+ description Ergashev_DSP
+ switchport access vlan 2757
+!
+Interface Ethernet1/0/10
+ description Narzullayev_DSP
+ switchport access vlan 2757
+!
+Interface Ethernet1/0/11
+ description Dadaboyev_Net
+ switchport access vlan 399
+!
+Interface Ethernet1/0/12
+ description Dadaboyev_DSP
+ switchport access vlan 2757
+!
+Interface Ethernet1/0/13
+ description Narzullayev_Net
+ switchport access vlan 399
+!
+Interface Ethernet1/0/14
+ description Ubaydullayev_DSP
+ switchport access vlan 2757
+!
+Interface Ethernet1/0/15
+ description Komilov_Net
+ switchport access vlan 399
+!
+Interface Ethernet1/0/16
+ description Komilov_DSP
+ switchport access vlan 2757
+!
+Interface Ethernet1/0/17
+ switchport access vlan 2757
+!
+Interface Ethernet1/0/18
+ description monitoring_PC_ong
+ switchport access vlan 399
+!
+Interface Ethernet1/0/19
+ description monitoring_PC_chap
+ switchport access vlan 399
+!
+Interface Ethernet1/0/20
+ description EKRAN_86
+ switchport access vlan 399
+!
+Interface Ethernet1/0/21
+ switchport access vlan 399
+!
+Interface Ethernet1/0/22
+ switchport access vlan 399
+!
+Interface Ethernet1/0/23
+ description CONTOLLER
+ switchport mode trunk
+ switchport trunk allowed vlan 399;777;788 
+ loopback-detection specified-vlan 399
+ loopback-detection control shutdown
+ loopback-detection send packet number 5
+!
+Interface Ethernet1/0/24
+ description ip_tel_kanselariya
+ switchport mode trunk
+ switchport trunk allowed vlan 399;777;788 
+ loopback-detection specified-vlan 777
+ loopback-detection control shutdown
+ loopback-detection send packet number 5
+!
+Interface Ethernet1/0/25
+ speed-duplex force100-fx module-type auto-detected
+!
+Interface Ethernet1/0/26
+!
+Interface Ethernet1/0/27
+!
+Interface Ethernet1/0/28
+ description Milliy_podval_J_1-4_SW3_port50
+ switchport mode trunk
+ switchport trunk allowed vlan 10;30;211;399;505;777;1489;2002 
+ switchport trunk allowed vlan add 2757;3303;3381 
+!
+interface Vlan1
+!
+interface Vlan30
+ ip address 197.181.58.105 255.255.255.0
+!
+interface Vlan399
+ ip address 192.168.202.208 255.255.255.0
+!
+interface Vlan1489
+ ip address 192.168.0.214 255.255.255.0
+!
+interface Vlan2757
+ description L3_Exat
+ ip address 10.70.26.208 255.255.255.0
+!
+interface Vlan3381
+ ip address 190.160.12.1 255.255.248.0
+!
+interface Loopback1
+ ip address 192.168.16.16 255.255.255.255
+!
+ntp enable
+ntp server 197.181.58.251
+!
+!
+no login
+!
+captive-portal
+!
+end
+
+BLUE_team#
