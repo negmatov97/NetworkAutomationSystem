@@ -1,17 +1,11 @@
 from flask import jsonify, request, Flask, Blueprint
 from db_config import db, Log, District
 from gen_token import token_required
-import binary_commands
-import yaml
-from datetime import datetime
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'manashukeymanashukey'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:toor@192.168.202.46/postgres'
 
 logs = Blueprint('logs', __name__)
 
-db.init_app(app)
+
 
 
 # Ma'lumotlarni olish uchun API yo'nalishi

@@ -30,10 +30,6 @@ CORS(app)
 
 migrate = Migrate(app, db)
 
-# Swagger configuration
-SWAGGER_URL = '/swagger'
-API_URL = '/static/swagger.yaml'
-
 
 db.init_app(app)
 

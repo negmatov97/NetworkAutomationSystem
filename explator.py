@@ -4,29 +4,13 @@ from gen_token import token_required
 from db_config import db, User, District, Roles, Log
 from datetime import datetime
 import os
-import base64
-
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'manashukeymanashukey'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:toor@192.168.202.46/postgres'
 
 
 user_api = Blueprint('user_api', __name__)
 
-db.init_app(app)
 
 
-UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')  # Server upload folder
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-# Ensure the upload folder exists
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
-
-# Function to check allowed file extensions
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 class DistrictHelper:
@@ -272,22 +256,6 @@ def user_search(current_user):
         })
 
     return jsonify(search_results)
-
-@user_api.route('/check_all_users_activity', methods=['GET'])
-@token_required
-def check_all_users_activity(current_user):
-
-    if not current_user.roles == "S_admin" and current_user.dist == 10:
-        return jsonify({'message': 'Sizning Huqularingiz cheklangan'}), 401
-
-    user_activity_status = {}
-
-    # Query session records to check user activity
-    sessions = UserSession.query.all()
-    for session in sessions:
-        user = User.query.get(session.user_id)
-        user_activity_status[user.username] = session.active
-
 
 
 @user_api.route('/roles', methods=['GET'])

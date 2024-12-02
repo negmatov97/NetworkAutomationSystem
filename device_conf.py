@@ -7,16 +7,8 @@ from datetime import datetime
 
 
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'manashukeymanashukey'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:toor@192.168.202.46/postgres'
-
-
 config = Blueprint('config', __name__)
 
-
-
-db.init_app(app)
 
 # Sample function to retrieve data
 def get_one(ip):

@@ -1,4 +1,4 @@
-from flask import jsonify, request, Flask, Blueprint, send_from_directory, url_for, send_file
+from flask import jsonify, request, Blueprint
 from dotenv import load_dotenv
 from db_config import db, UniversalTable, Backup_list, DeviceBackup, District, Vendor, Section
 import paramiko
@@ -10,15 +10,12 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
 load_dotenv()
-app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 
-user = "Negmatov"
-passw = "admin123"
+
+user = os.environ.get('BACKUPUSER')
+passw = os.environ.get('BACKUPPASS')
+
 backup = Blueprint('backup', __name__)
-
-db.init_app(app)
 
 tftp_folder = os.path.join(os.path.dirname(__file__), 'tftp-server')
 

@@ -1,7 +1,7 @@
 from flask import Blueprint, Flask, request, jsonify, make_response
 import jwt
 from werkzeug.security import check_password_hash
-from db_config import db, User, UserSession
+from db_config import db, User
 from datetime import datetime
 from gen_token import token_required
 from flask_cors import CORS

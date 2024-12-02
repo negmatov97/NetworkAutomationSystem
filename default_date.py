@@ -6,20 +6,9 @@ from db_config import db, District, Section, Vlan, Vendor, Log
 from datetime import datetime
 
 
-app = Flask (__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:toor@192.168.202.46/postgres'
 
 default_api = Blueprint('default_api', __name__)
 
-db.init_app(app)
-
-
-DB_HOST = "localhost"
-DB_NAME = "postgres"
-DB_USER = "postgres"
-DB_PASS = "toor"
-
-conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
 
 ##############################################################################################
 #                             Dastlabki ma'lumotlar (District)                               #
