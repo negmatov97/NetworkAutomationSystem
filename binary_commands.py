@@ -1,20 +1,12 @@
 import os
-from idlelib.macosx import tkVersionWarning
-from flask import Flask, json, jsonify, request
+from flask import json, jsonify
 from gen_token import token_required
-from db_config import db
 import paramiko
 import time
 import Filters_Default
 import logging
-import traceback
 
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'manashukeymanashukey'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:toor@192.168.202.46/postgres'
-
-db.init_app(app)
 
 username = os.environ.get('BACKUPUSER')
 password = os.environ.get('BACKUPPASS')

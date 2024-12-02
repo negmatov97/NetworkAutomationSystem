@@ -9,10 +9,6 @@ import os
 user_api = Blueprint('user_api', __name__)
 
 
-
-
-
-
 class DistrictHelper:
     @staticmethod
     def get_district_short(district_id):
