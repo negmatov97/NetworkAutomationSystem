@@ -39,8 +39,7 @@ def login():
             'familiya': user.familiya,
             'ism': user.ism,
             'dist': user.dist,
-            'roles': user.roles,
-            'photo': user.photo
+            'roles': user.roles
         }, app.config['SECRET_KEY'], algorithm='HS256')
 
         return jsonify({'token': token.decode('UTF-8')})

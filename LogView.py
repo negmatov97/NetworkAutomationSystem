@@ -27,6 +27,7 @@ def get_logs(current_user):
 
     for log in logs:
         logs_list.append({
+            'id': log.id,
             'username': log.username,
             'last_name': log.last_name,
             'district': log.district,

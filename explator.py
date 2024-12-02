@@ -1,7 +1,7 @@
 from werkzeug.security import generate_password_hash
 from flask import Flask, Blueprint, request, jsonify
 from gen_token import token_required
-from db_config import db, User, UserSession, District, Roles, Log
+from db_config import db, User, District, Roles, Log
 from datetime import datetime
 import os
 import base64
@@ -61,7 +61,7 @@ def get_user(current_user):
 @token_required
 def get_all_users(current_user):
     # Check if the current user has the required role
-    if current_user.roles != "S_admin" or current_user.dist != 10:
+    if current_user.roles != "S_admin":
         return jsonify({'message': 'Sizning Huqularingiz cheklangan'}), 401
 
     try:
@@ -118,11 +118,11 @@ def get_one_users(current_user, id):
 @token_required
 def create_user(current_user):
     # Check if the current user has the required role
-    if not current_user.roles == "S_admin" and current_user.dist == 10:
+    if not current_user.roles == "S_admin":
         return jsonify({'message': 'Sizning Huqularingiz cheklangan'}), 401
 
     # Validate input data
-    data = request.form
+    data = request.get_json()  # JSON ma'lumotlarini olish
     required_fields = ['familiya', 'ism', 'username', 'password', 'dist', 'roles']
     if not all(field in data for field in required_fields):
         return jsonify({'message': 'Required fields are missing'}), 400
@@ -130,55 +130,28 @@ def create_user(current_user):
     # Hash the password
     hashed_password = generate_password_hash(data['password'])
 
-    # Check and handle file upload for photo
-    if 'photo' not in request.files or not allowed_file(request.files['photo'].filename):
-        return jsonify({'message': 'A valid photo file is required'}), 400
-
-    file = request.files['photo']
-    photo_data = file.read()  # Read the binary data of the uploaded file
-
-    # Create a new user with the binary photo data
+    # Create a new user
     new_user = User(
         familiya=data['familiya'],
         ism=data['ism'],
         username=data['username'],
         password=hashed_password,
         dist=data['dist'],
-        roles=data['roles'],
-        photo=photo_data  # Save binary data in the database
+        roles=data['roles']
     )
 
     # Add the user to the database
     try:
         db.session.add(new_user)
         db.session.commit()
-
-        # Log the user creation
-        log_entry = Log(
-            username=current_user.username,
-            last_name=current_user.familiya,
-            district=current_user.dist,
-            roles=current_user.roles,
-            actions=f"{current_user.username} {current_user.familiya} tomonidan user qo'shildi"
-                    f" funktsiyalari boshlag'ich holatda sozlandi",
-            times=datetime.now(),
-            dates=datetime.today().date()
-        )
-        db.session.add(log_entry)
-        db.session.commit()
-
-        # Encode the photo data to Base64 for JSON serialization
-        photo_base64 = base64.b64encode(new_user.photo).decode('utf-8')
-
         return jsonify({
-            'message': 'Yangi foydalanuvchi yaratildi',
-            'photo': photo_base64  # Base64 encoded photo for JSON response
+            'message': 'Yangi foydalanuvchi yaratildi'
         }), 201
     except Exception as e:
-        # Log the error
         print(f"Error creating user: {e}")
         db.session.rollback()
         return jsonify({'message': 'Internal server error'}), 500
+
 
 
 

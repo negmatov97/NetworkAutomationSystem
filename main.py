@@ -5,7 +5,7 @@ import schedule
 from flask import Flask
 from flask_cors import CORS
 from dotenv import load_dotenv
-from db_config import db
+from db_config import db, seed_data
 from gen_token import api_bp as api_bp
 from explator import user_api as user_api
 from Ipv4_tab import frist_api
@@ -16,6 +16,8 @@ from device_conf import config as config
 from LogView import logs as logs
 from backup_auto.backuptestor import backup_function
 from service import service as service
+from flask_migrate import Migrate
+
 
 load_dotenv()
 
@@ -24,6 +26,9 @@ app = Flask(__name__, template_folder='templates')
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 CORS(app)
+
+
+migrate = Migrate(app, db)
 
 # Swagger configuration
 SWAGGER_URL = '/swagger'
@@ -42,6 +47,11 @@ app.register_blueprint(logs)
 app.register_blueprint(default_api)
 app.register_blueprint(statis_api)
 app.register_blueprint(service)
+
+@app.cli.command("seed")
+def seed():
+    """Boshlang'ich ma'lumotlarni kiritadi."""
+    seed_data()
 
 # Backup-related functions and scheduling
 

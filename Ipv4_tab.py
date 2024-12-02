@@ -29,7 +29,7 @@ conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_
 @token_required
 def get_data(current_user):
     try:
-        if current_user.roles == "S_admin" and current_user.dist == 10:
+        if current_user.roles == "S_admin":
             # Fetch all data
             data = UniversalTable.query.all()
         elif 1 <= current_user.dist <= 8:
@@ -71,7 +71,7 @@ def get_data(current_user):
 @token_required
 def get_data_mgmt(current_user):
     try:
-        if current_user.roles == "S_admin" and current_user.dist == 10:
+        if current_user.roles == "S_admin":
             # Fetch all data
             data = UniversalTable.query.all()
         elif 1 <= current_user.dist <= 8:

@@ -408,7 +408,7 @@ def count_vendors(current_user):
             vlan_count = db.session.query(UniversalTable.vlan_fk).filter(UniversalTable.district_fk == current_user.dist).distinct().count()
             IPv4_count = db.session.query(UniversalTable.ip_add).filter(UniversalTable.district_fk == current_user.dist, UniversalTable.vlan_fk == 1).distinct().count()
             IPv4_backup = db.session.query(UniversalTable.ip_add).filter(UniversalTable.district_fk == current_user.dist,
-                                                                        UniversalTable.vlan_fk == 10).distinct().count()
+                                                                        UniversalTable.vlan_fk == 2).distinct().count()
 
         # Create a JSON response
         response = {

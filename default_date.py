@@ -25,12 +25,12 @@ conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_
 #                             Dastlabki ma'lumotlar (District)                               #
 ##############################################################################################
 @default_api.route('/districts', methods=['GET'])
-#@token_required
-def get_districts():
+@token_required
+def get_districts(current_user):
 
-    # allowed_roles = ["S_admin", "D_admin", "RO_admin"]
-    # if not current_user.roles in allowed_roles:
-    #     return jsonify({'message': 'Sizning Huqularingiz cheklangan'}), 401
+    allowed_roles = ["S_admin", "D_admin", "RO_admin"]
+    if not current_user.roles in allowed_roles:
+        return jsonify({'message': 'Sizning Huqularingiz cheklangan'}), 401
 
     try:
         districts = District.query.all()
@@ -43,7 +43,7 @@ def get_districts():
 @token_required
 def get_district_by_id(current_user, id):
 
-    if current_user.roles != "S_admin" or current_user.dist != 10:
+    if current_user.roles != "S_admin":
         return jsonify({'message': 'Sizning Huqularingiz cheklangan'}), 401
 
     try:
@@ -65,7 +65,7 @@ def get_district_by_id(current_user, id):
 @token_required
 def insert_district(current_user):
 
-    if current_user.roles != "S_admin" or current_user.dist != 10:
+    if current_user.roles != "S_admin":
         return jsonify({'message': 'Sizning Huqularingiz cheklangan'}), 401
 
     try:
@@ -75,17 +75,17 @@ def insert_district(current_user):
         db.session.commit()
 
         # Log the action
-        log_entry = Log(
-            username=current_user.username,
-            last_name=current_user.familiya,
-            district=current_user.dist,
-            roles=current_user.roles,
-            actions=f"{current_user.username} {current_user.familiya} tomonidan Boshqaruv bo'g'ini uchun {data['name']} kiritildi",
-            times=datetime.now(),
-            dates = datetime.today().date()
-        )
-        db.session.add(log_entry)
-        db.session.commit()
+        # log_entry = Log(
+        #     username=current_user.username,
+        #     last_name=current_user.familiya,
+        #     district=current_user.dist,
+        #     roles=current_user.roles,
+        #     actions=f"{current_user.username} {current_user.familiya} tomonidan Boshqaruv bo'g'ini uchun {data['name']} kiritildi",
+        #     times=datetime.now(),
+        #     dates = datetime.today().date()
+        # )
+        # db.session.add(log_entry)
+        # db.session.commit()
 
         return jsonify({"message": "Ma'lumot muvoffaqiyatli kiritildi!"})
     except Exception as e:
@@ -95,7 +95,7 @@ def insert_district(current_user):
 @token_required
 def update_district(current_user, id):
 
-    if current_user.roles != "S_admin" or current_user.dist != 10:
+    if current_user.roles != "S_admin":
         return jsonify({'message': 'Sizning Huqularingiz cheklangan'}), 401
 
     try:
@@ -131,7 +131,7 @@ def update_district(current_user, id):
 @token_required
 def delete_district(current_user, id):
 
-    if current_user.roles != "S_admin" or current_user.dist != 10:
+    if current_user.roles != "S_admin":
         return jsonify({'message': 'Sizning Huqularingiz cheklangan'}), 401
 
     try:
@@ -168,7 +168,7 @@ def delete_district(current_user, id):
 @token_required
 def get_section(current_user):
 
-    if current_user.roles != "S_admin" or current_user.dist != 10:
+    if current_user.roles != "S_admin":
         return jsonify({'message': 'Sizning Huqularingiz cheklangan'}), 401
 
     try:
@@ -198,7 +198,7 @@ def get_section(current_user):
 @token_required
 def insert_section(current_user):
 
-    if current_user.roles != "S_admin" or current_user.dist != 10:
+    if current_user.roles != "S_admin":
         return jsonify({'message': 'Sizning Huqularingiz cheklangan'}), 401
 
     try:
@@ -227,7 +227,7 @@ def insert_section(current_user):
 @token_required
 def update_section(current_user, id):
 
-    if current_user.roles != "S_admin" or current_user.dist != 10:
+    if current_user.roles != "S_admin":
         return jsonify({'message': 'Sizning Huqularingiz cheklangan'}), 401
 
     try:
@@ -261,7 +261,7 @@ def update_section(current_user, id):
 @token_required
 def delete_section(current_user, id):
 
-    if current_user.roles != "S_admin" or current_user.dist != 10:
+    if current_user.roles != "S_admin":
         return jsonify({'message': 'Sizning Huqularingiz cheklangan'}), 401
 
     try:
@@ -296,7 +296,7 @@ def delete_section(current_user, id):
 @token_required
 def get_vlans(current_user):
 
-    if current_user.roles != "S_admin" or current_user.dist != 10:
+    if current_user.roles != "S_admin":
         return jsonify({'message': 'Sizning Huqularingiz cheklangan'}), 401
 
     try:
@@ -310,7 +310,7 @@ def get_vlans(current_user):
 @token_required
 def insert_vlan(current_user):
 
-    if current_user.roles != "S_admin" or current_user.dist != 10:
+    if current_user.roles != "S_admin":
         return jsonify({'message': 'Sizning Huqularingiz cheklangan'}), 401
 
     try:
@@ -339,7 +339,7 @@ def insert_vlan(current_user):
 @token_required
 def update_vlan(current_user, id):
 
-    if current_user.roles != "S_admin" or current_user.dist != 10:
+    if current_user.roles != "S_admin":
         return jsonify({'message': 'Sizning Huqularingiz cheklangan'}), 401
     try:
         data = request.get_json()
@@ -374,7 +374,7 @@ def update_vlan(current_user, id):
 @token_required
 def delete_vlan(current_user, id):
 
-    if current_user.roles != "S_admin" or current_user.dist != 10:
+    if current_user.roles != "S_admin":
         return jsonify({'message': 'Sizning Huqularingiz cheklangan'}), 401
 
     try:
@@ -409,7 +409,7 @@ def delete_vlan(current_user, id):
 @token_required
 def get_vendors(current_user):
 
-    if current_user.roles != "S_admin" or current_user.dist != 10:
+    if current_user.roles != "S_admin":
         return jsonify({'message': 'Sizning Huqularingiz cheklangan'}), 401
 
     try:
@@ -423,7 +423,7 @@ def get_vendors(current_user):
 @token_required
 def insert_vendor(current_user):
 
-    if current_user.roles != "S_admin" or current_user.dist != 10:
+    if current_user.roles != "S_admin":
         return jsonify({'message': 'Sizning Huqularingiz cheklangan'}), 401
 
     try:
@@ -451,7 +451,7 @@ def insert_vendor(current_user):
 @token_required
 def update_vendor(current_user, id):
 
-    if current_user.roles != "S_admin" or current_user.dist != 10:
+    if current_user.roles != "S_admin":
         return jsonify({'message': 'Sizning Huqularingiz cheklangan'}), 401
 
     try:
@@ -484,7 +484,7 @@ def update_vendor(current_user, id):
 @token_required
 def delete_vendor(current_user, id):
 
-    if current_user.roles != "S_admin" or current_user.dist != 10:
+    if current_user.roles != "S_admin":
         return jsonify({'message': 'Sizning Huqularingiz cheklangan'}), 401
 
     try:

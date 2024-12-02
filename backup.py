@@ -166,7 +166,7 @@ def perform_backup():
 @token_required
 def get_backup_list(current_user):
 
-    if current_user.roles != "S_admin" or current_user.dist != 10:
+    if current_user.roles != "S_admin":
         return jsonify({'message': 'Sizning Huqularingiz cheklangan'}), 401
     try:
         priority_map = {
@@ -217,7 +217,7 @@ def get_backup_list(current_user):
 @token_required
 def edit_backup_priority(current_user):
 
-    if current_user.roles != "S_admin" or current_user.dist != 10:
+    if current_user.roles != "S_admin":
         return jsonify({'message': 'Sizning Huqularingiz cheklangan'})
 
     data = request.get_json()
@@ -249,7 +249,7 @@ def edit_backup_priority(current_user):
 @token_required
 def delete_backup_record(current_user):
 
-    if current_user.roles != "S_admin" or current_user.dist != 10:
+    if current_user.roles != "S_admin":
         return jsonify({'message': 'Sizning Huqularingiz cheklangan'})
 
     data = request.get_json()
@@ -286,7 +286,7 @@ def delete_backup_record(current_user):
 def get_device_backups(current_user):
     try:
 
-        if current_user.roles != "S_admin" or current_user.dist != 10:
+        if current_user.roles != "S_admin":
             return jsonify({'message': 'Sizning Huqularingiz cheklangan'})
 
         # Query all records from the DeviceBackup table

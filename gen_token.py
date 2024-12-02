@@ -3,7 +3,7 @@ from functools import wraps
 from flask import request, jsonify
 import jwt
 from werkzeug.security import check_password_hash
-from db_config import User  # Import the User model or relevant imports
+from db_config import User
 from flask_cors import CORS
 
 
