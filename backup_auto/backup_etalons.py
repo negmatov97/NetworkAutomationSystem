@@ -6,13 +6,14 @@ import paramiko
 import time
 from datetime import datetime
 import pytz
+from dotenv import load_dotenv
 
 tz = pytz.timezone('Asia/Tashkent')
 
-
+load_dotenv()
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:toor@127.0.0.1/postgres"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 db.init_app(app)
 
 
